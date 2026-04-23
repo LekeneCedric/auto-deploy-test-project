@@ -1,0 +1,26 @@
+version: "1.0"
+project: "test-sample-lab"
+
+pipeline:
+  - id: "scan"
+    type: "build"
+    name: "Laboratory Scan"
+    description: "Scan source code and prepare environment"
+  
+  - id: "test"
+    type: "test"
+    name: "Unit Testing"
+    depends_on: ["scan"]
+    command: "go test ./..."
+
+  - id: "build"
+    type: "build"
+    name: "Container Synthesis"
+    depends_on: ["test"]
+    dockerfile: "Dockerfile"
+
+  - id: "deploy"
+    type: "deploy"
+    name: "Launch to Production"
+    depends_on: ["build"]
+    port: 8080
