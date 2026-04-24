@@ -18,7 +18,7 @@ func TestHelloHandler(t *testing.T) {
 	handler.ServeHTTP(rr, req)
 
 	if status := rr.Code; status != http.StatusOK {
-		t.Errorf("handler returned wrong status code: got %v want %v",
+		t.Errorf("handler returned wrong status code: got %v wan %v",
 			status, http.StatusOK)
 	}
 
