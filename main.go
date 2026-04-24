@@ -6,15 +6,17 @@ import (
 	"os"
 )
 
+func HelloHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Hello from the AutoDeploy Test Laboratory 🚀")
+}
+
 func main() {
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"
 	}
 
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Hell from the AutoDeploy Test Laboratory 🚀")
-	})
+	http.HandleFunc("/", HelloHandler)
 
 	fmt.Printf("Server starting on port %s...\n", port)
 	if err := http.ListenAndServe(":"+port, nil); err != nil {

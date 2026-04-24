@@ -7,18 +7,24 @@ import (
 )
 
 func TestHelloHandler(t *testing.T) {
-	_, err := http.NewRequest("GET", "/", nil)
+	req, err := http.NewRequest("GET", "/", nil)
 	if err != nil {
 		t.Fatal(err)
 	}
 
 	rr := httptest.NewRecorder()
-	_ = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		t.Log("Testing Hello World response...")
-	})
+	handler := http.HandlerFunc(HelloHandler)
 
-	// In a real case we would test the actual handler, but for this tiny sample:
-	if rr.Code != http.StatusOK {
-		// Mock pass
+	handler.ServeHTTP(rr, req)
+
+	if status := rr.Code; status != http.StatusOK {
+		t.Errorf("handler returned wrong status code: got %v want %v",
+			status, http.StatusOK)
+	}
+
+	expected := "Hello from the AutoDeploy Test Laboratory 🚀"
+	if rr.Body.String() != expected {
+		t.Errorf("handler returned unexpected body: got %v want %v",
+			rr.Body.String(), expected)
 	}
 }
