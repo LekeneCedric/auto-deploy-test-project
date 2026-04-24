@@ -7,13 +7,13 @@ import (
 )
 
 func TestHelloHandler(t *testing.T) {
-	req, err := http.NewRequest("GET", "/", nil)
+	_, err := http.NewRequest("GET", "/", nil)
 	if err != nil {
 		t.Fatal(err)
 	}
 
 	rr := httptest.NewRecorder()
-	handler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	_ = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		t.Log("Testing Hello World response...")
 	})
 
