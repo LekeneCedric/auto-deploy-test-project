@@ -7,7 +7,7 @@ import (
 )
 
 func HelloHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hello from the AutoDeploy Test Labor 🚀")
+	fmt.Fprintf(w, "Hello from th AutoDeploy Test Labor 🚀")
 }
 
 func main() {
